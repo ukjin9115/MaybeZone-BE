@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="main.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>글 작성</title>
+</head>
+<body>
+<div th:replace="~{nav.html :: navbar}"></div>
+
+<form action="/add" method="POST" enctype="multipart/form-data">
+    <input name="title" placeholder="제목" required>
+    <input name="price" type="number" placeholder="가격" required>
+    <label for="file">파일 업로드:</label>
+    <input type="file" id="file" name="file" accept="image/*"><br>
+    <button type="submit">작성하기</button>
+</form>
+
+</body>
+</html>

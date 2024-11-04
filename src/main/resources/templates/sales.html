@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Sales List</title>
+</head>
+<body>
+<h1>Sales List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Item ID</th>
+    <th>Price</th>
+    <th>Count</th> <!-- count 열 추가 -->
+    <th>Member ID</th>
+    <th>Created Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="sale : ${salesList}">
+    <td th:text="${sale.itemId}"></td>
+    <td th:text="${sale.price}"></td>
+    <td th:text="${sale.memberId}"></td>
+    <td th:text="${sale.count}"></td> <!-- count 값 표시 -->
+    <td th:text="${sale.created}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

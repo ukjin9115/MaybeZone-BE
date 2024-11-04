@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 콘솔 출력 Appender 설정 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 디폴트 로거 레벨 설정 -->
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <!-- 개발 환경 -->
+    <springProfile name="dev">
+        <root level="debug">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
+    <!-- 테스트 환경 -->
+    <springProfile name="test">
+        <root level="warn">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
+    <!-- 프로덕션 환경 -->
+    <springProfile name="prod">
+        <root level="error">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+</configuration>

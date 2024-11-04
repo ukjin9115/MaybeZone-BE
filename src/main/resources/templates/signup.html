@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="main.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="~{nav.html :: navbar}"></div>
+
+<form action="/register" method="POST">
+    <input name="username" placeholder="이름">
+    <input name="displayName" placeholder="닉네임">
+    <input name="password" type="password" placeholder="비밀번호">
+    <button type="submit">가입하기</button>
+</form>
+
+</body>
+</html>

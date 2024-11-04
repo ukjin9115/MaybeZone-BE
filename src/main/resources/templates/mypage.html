@@ -1,0 +1,21 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="main.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="~{nav.html :: navbar}"></div>
+<h4>My page</h4>
+<!--//<span sec:authentication="principal"></span>-->
+<div sec:authorize="isAuthenticated()">
+<!--    //로그인된 사람만 보여주쇼-->
+    <span sec:authentication="principal.username"></span>
+    <span sec:authentication="principal.authorities"></span>
+</div>
+</body>
+</html>

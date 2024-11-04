@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="main.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>아이템 수정</title>
+</head>
+<body>
+<div th:replace="~{nav.html :: navbar}"></div>
+<div class="detail">
+    <h4>아이템 수정</h4>
+    <img th:src="@{/uploads/{file}(file=${shopItem.filePath})}" alt="아이템 이미지">
+    <form action="/update" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${shopItem.id}"/>
+        <input name="title" th:value="${shopItem.title}" placeholder="제목" required/>
+        <input name="price" type="number" th:value="${shopItem.price}" placeholder="가격" required/>
+        <label for="file">파일 업로드:</label>
+        <input type="file" id="file" name="file" accept="image/*"><br>
+        <button type="submit">수정하기</button>
+    </form>
+</div>
+
+</body>
+</html>

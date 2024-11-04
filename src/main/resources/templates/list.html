@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="main.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{/main.css}" rel="stylesheet" />
+    <title>아이템 목록</title>
+</head>
+<body>
+<div th:replace="~{nav.html :: navbar}"></div>
+
+<form action="/search" method="POST">
+    <input name="searchText" style="display:inline">
+    <button type="submit">검색</button>
+</form>
+<div class="card" th:each="i : ${shopItems}">
+    <img th:src="@{/uploads/{file}(file=${i.filePath})}" alt="아이템 이미지">
+    <div>
+        <h4>
+            <a th:href="@{/detail/{id}(id=${i.id})}" th:text="${i.title}">아이템 제목</a>
+        </h4>
+        <p th:text="${i.price}">아이템 가격</p>
+        <p th:text="'판매자: ' + ${i.member.displayName}">아이템 작성자</p>
+        <a th:href="@{/change/{id}(id=${i.id})}">✏️</a>
+        <span th:onclick="deleteItem([[${i.id}]])">🗑️</span>
+    </div>
+</div>
+
+<!-- 페이지 네비게이션 버튼 -->
+<div class="pagination">
+    <a th:if="${currentPage > 1}" th:href="@{/list(page=${currentPage - 1})}">« 이전</a>
+
+    <span th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+        <a th:if="${pageNum == currentPage}" class="active" th:text="${pageNum}"></a>
+        <a th:if="${pageNum != currentPage}" th:href="@{/list(page=${pageNum})}" th:text="${pageNum}"></a>
+    </span>
+
+    <a th:if="${currentPage < totalPages}" th:href="@{/list(page=${currentPage + 1})}">다음 »</a>
+</div>
+
+<script>
+    function deleteItem(id) {
+        fetch(`/shopItem/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('삭제 완료');
+                window.location.reload();  // 페이지를 새로고침하여 변경 사항 반영
+            } else {
+                alert('삭제 실패');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
